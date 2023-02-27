@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -18,6 +20,7 @@ public class UserController {
     @Autowired
     UserRepository userRepository;
 
+    private BCryptPasswordEncoder encoder;
     // lay tat ca user
     @GetMapping("/users")
     public ResponseEntity<List<User>> getAllUsers(@RequestParam(required = false) String username) {
@@ -42,8 +45,9 @@ public class UserController {
     @PostMapping("/users")
     public ResponseEntity<User> createUser(@RequestBody User user) {
         try {
+            String password = encoder.encode(user.getPassword());
             User _user = userRepository
-                    .save(new User( user.getUsername(), user.getAlias(), user.getAvatar(), user.getPhone(), user.getEmail(), user.getGender(), user.getPassword(), "user"));
+                    .save(new User( user.getUsername(), user.getAlias(), user.getAvatar(), user.getPhone(), user.getEmail(), user.getGender(), password, "user"));
             return new ResponseEntity<>(_user, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -70,7 +74,7 @@ public class UserController {
     }
 
     //doi password
-    @PutMapping("/users/{id}")
+    @PutMapping("/users/{id}/change-password")
     public ResponseEntity<User> updatePassword(@PathVariable("id") long id, @RequestBody User user) {
         Optional<User> userData = userRepository.findById(id);
 
@@ -94,6 +98,7 @@ public class UserController {
         }
     }
 
+    // tim bang alias
     @GetMapping("/users/alias")
     public ResponseEntity<List<User>> findByAlias(@PathVariable("alias") String alias) {
         try {
