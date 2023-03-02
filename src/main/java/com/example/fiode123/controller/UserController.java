@@ -21,7 +21,7 @@ public class UserController {
     UserRepository userRepository;
 
     private BCryptPasswordEncoder encoder;
-    // lay tat ca user
+    // lay tat ca user hoac theo username
     @GetMapping("/users")
     public ResponseEntity<List<User>> getAllUsers(@RequestParam(required = false) String username) {
         try {
@@ -98,7 +98,7 @@ public class UserController {
         }
     }
 
-    // tim bang alias
+    // tim bang alias (co the lam search users)
     @GetMapping("/users/alias")
     public ResponseEntity<List<User>> findByAlias(@PathVariable("alias") String alias) {
         try {

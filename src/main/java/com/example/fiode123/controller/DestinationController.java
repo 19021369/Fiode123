@@ -20,7 +20,7 @@ public class DestinationController {
     @Autowired
     DestinationRepository destinationRepository;
 
-    // lay tat ca destination
+    // lay tat ca destination lam trang destinations
     @GetMapping("/destinations")
     public ResponseEntity<List<Destination>> getAllDestinations(@RequestParam(required = false) String destinationname) {
         try {
@@ -56,8 +56,6 @@ public class DestinationController {
     @PutMapping("/destinations/{id}")
     public ResponseEntity<Destination> updateDestination(@PathVariable("id") long id, @RequestBody Destination destination) {
         Optional<Destination> destinationData = destinationRepository.findById(id);
-
-
         if (destinationData.isPresent()) {
             Destination _destination = destinationData.get();
             _destination.setDestinationname(destination.getDestinationname());
@@ -84,4 +82,21 @@ public class DestinationController {
         }
     }
 
+    // lay destinations theo region(tinh thanh) de lam trang region
+    @GetMapping("regions/{region}")
+    public ResponseEntity<List<Destination>> getDestinationsByRegion(@RequestParam(required = false) String destinationlocation) {
+        try {
+            List<Destination> destinations = new ArrayList<Destination>();
+
+            destinationRepository.findByRegionName(destinationlocation).forEach(destinations::add);
+
+            if(destinations.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+
+            return new ResponseEntity<>(destinations, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

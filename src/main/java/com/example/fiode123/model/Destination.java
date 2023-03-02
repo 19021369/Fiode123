@@ -1,7 +1,10 @@
 package com.example.fiode123.model;
 
-import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.Table;
+
+import javax.persistence.*;
+
 
 @Entity
 @Table(name = "destinations")

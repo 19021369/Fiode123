@@ -1,13 +1,17 @@
 package com.example.fiode123.model;
 
-import jakarta.persistence.*;
+
 import lombok.Data;
+import org.hibernate.annotations.Table;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
 @Data
 public class User {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(nullable = false, unique = true, length = 10)
