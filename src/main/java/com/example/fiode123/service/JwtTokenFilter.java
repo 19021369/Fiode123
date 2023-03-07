@@ -1,6 +1,7 @@
 package com.example.fiode123.service;
 
 import com.example.fiode123.config.UserAuthorDTO;
+import com.example.fiode123.model.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface RegionRepository extends JpaRepository<Event, Long> {
+public interface RegionRepository extends JpaRepository<Region, Long> {
     List<Region> findBySiteName(String sitename);
     List<Region> findByRegionName(String regionname);
 }

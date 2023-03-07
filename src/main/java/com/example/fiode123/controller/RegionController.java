@@ -1,9 +1,7 @@
 package com.example.fiode123.controller;
 
 
-import com.example.fiode123.model.Destination;
 import com.example.fiode123.model.Region;
-import com.example.fiode123.repository.DestinationRepository;
 import com.example.fiode123.repository.RegionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

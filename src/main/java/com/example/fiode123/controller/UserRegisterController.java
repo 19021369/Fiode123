@@ -1,6 +1,7 @@
 package com.example.fiode123.controller;
 
 import com.example.fiode123.config.UserService;
+import com.example.fiode123.model.UserRegisterRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,8 +15,7 @@ public class UserRegisterController {
     private UserService userService;
 
     @PostMapping("/api/user/register")
-    public String register(
-            @Valid @RequestBody UserRegisterRequest userRegisterRequest) {
+    public String register(@Valid @RequestBody UserRegisterRequest userRegisterRequest) {
         return userService.register(userRegisterRequest)
                 .map(DfResponse::okEntity);
     }

@@ -7,12 +7,12 @@ import org.hibernate.annotations.Table;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "users")
+@Table(name = "users");
 @Data
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(nullable = false, unique = true, length = 10)
     public String username;

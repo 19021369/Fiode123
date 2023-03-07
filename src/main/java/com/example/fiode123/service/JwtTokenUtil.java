@@ -2,14 +2,17 @@ package com.example.fiode123.service;
 
 import com.example.fiode123.config.UserAuthorDTO;
 import com.example.fiode123.model.User;
+import io.jsonwebtoken.*;
 import lombok.Value;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import java.security.SignatureException;
+import javax.websocket.EncodeException;
 import java.util.Date;
 import java.util.List;
+
+import static com.example.fiode123.model.JsonObject.mapFrom;
 
 @Component
 public class JwtTokenUtil {
@@ -19,7 +22,7 @@ public class JwtTokenUtil {
     private String SECRET_KEY;
 
     public String generateAccessToken(User user,
-                                      List<String> roles) {
+                                      List<String> roles) throws EncodeException {
         UserAuthorDTO dto = new UserAuthorDTO()
                 .setUserId(user.getId())
                 .setRoles(roles);
@@ -47,8 +50,6 @@ public class JwtTokenUtil {
             LOGGER.error("JWT is invalid", ex);
         } catch (UnsupportedJwtException ex) {
             LOGGER.error("JWT is not supported", ex);
-        } catch (SignatureException ex) {
-            LOGGER.error("Signature validation failed");
         }
 
         return false;

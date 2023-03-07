@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -44,8 +43,9 @@ public class UserController {
     //tao user
     @PostMapping("/users")
     public ResponseEntity<User> createUser(@RequestBody User user) {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         try {
-            String password = encoder.encode(user.getPassword());
+            String password = passwordEncoder.encode(user.getPassword());
             User _user = userRepository
                     .save(new User( user.getUsername(), user.getAlias(), user.getAvatar(), user.getPhone(), user.getEmail(), user.getGender(), password, "user"));
             return new ResponseEntity<>(_user, HttpStatus.CREATED);
