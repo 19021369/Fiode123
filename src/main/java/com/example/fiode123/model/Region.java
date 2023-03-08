@@ -2,7 +2,6 @@ package com.example.fiode123.model;
 
 
 import lombok.Data;
-import org.hibernate.annotations.Table;
 
 import javax.persistence.*;
 

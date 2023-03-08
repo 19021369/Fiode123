@@ -1,13 +1,12 @@
 package com.example.fiode123.model;
 
 import lombok.Data;
-import org.hibernate.annotations.Table;
 
 import javax.persistence.*;
 
 
 @Entity
-@Table(name = "destinations")
+@Table (name = "destinations")
 @Data
 public class Destination {
     @Id

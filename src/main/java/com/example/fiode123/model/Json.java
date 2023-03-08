@@ -10,7 +10,6 @@ import java.util.Iterator;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
-
 public class Json {
     /**
      * Decode a given JSON string to a POJO of the given class type.
